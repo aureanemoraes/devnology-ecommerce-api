@@ -8,25 +8,34 @@ use Illuminate\Support\Arr;
 use App\Models\Supplier;
 use App\Http\Services\ProductFilterService;
 use App\Utils\FormatDataUtil;
+use Illuminate\Support\Facades\Cache;
+use App\Utils\PaginateJsonUtil;
 
 class ListAllProductsRule {
     // list all products of both suppliers
     public function listAllProducts($filters)
     {
-        $responses = Http::pool(function (Pool $pool) {
-            Supplier::get()->each(function (Supplier $supplier) use ($pool) {
-                return $pool->as($supplier->name)->get($supplier->api_base_url);
+        $products = Cache::get('products', null);
+
+        if (!isset($products)) {
+            $responses = Http::pool(function (Pool $pool) {
+                Supplier::get()->each(function (Supplier $supplier) use ($pool) {
+                    return $pool->as($supplier->name)->get($supplier->api_base_url);
+                });
             });
-        });
 
-        if (!$this->checkingIfAtLeastOneSupplierIsUp($responses))
-            return response()->error('Suppliers API are current unavailable.', 502);
+            if (!$this->checkingIfAtLeastOneSupplierIsUp($responses))
+                return response()->error('Suppliers API are current unavailable.', 502);
 
-        $products = $this->getProductsFromResponses($responses);
+            $products = $this->getProductsFromResponses($responses);
+
+            // 1 hour in cache
+            if (!Cache::has('products')) Cache::put('products', $products, 60 * 60 * 60);
+        }
 
         if (count($filters) > 0) $products = (new ProductFilterService())->filter($filters, $products);
 
-        return response()->success($products);
+        return response()->success((new PaginateJsonUtil())->paginate($products));
     }
 
     private function checkingIfAtLeastOneSupplierIsUp($responses)

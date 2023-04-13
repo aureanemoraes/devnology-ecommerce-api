@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Supplier ;
 use App\Http\Services\ProductFilterService;
 use App\Utils\FormatDataUtil;
+use Illuminate\Support\Facades\Cache;
+use App\Utils\PaginateJsonUtil;
 
 class ListProductsBySupplier {
     // list all products of both suppliers
@@ -13,16 +15,24 @@ class ListProductsBySupplier {
     {
         $supplier = Supplier::findOrFail($supplierId);
 
-        $response = Http::get($supplier->api_base_url);
+        $products = Cache::get('productsBySupplier', null);
 
-        if ($response->failed())
-            return response()->error("Could not retrieve data from $supplier->name.", $response->status());
+        if (!isset($products)) {
+            $response = Http::get($supplier->api_base_url);
 
-        $products = (new FormatDataUtil())->formatArray($response->json());
-        // $products = $response->json();
+            if ($response->failed())
+                return response()->error("Could not retrieve data from $supplier->name.", $response->status());
+
+            $products = $response->json();
+
+            // 1 hour in cache
+            if (!Cache::has('productsBySupplier')) Cache::put('productsBySupplier', $products, 60 * 60 * 60);
+        }
+
+        $products = (new FormatDataUtil())->formatArray($products);
 
         if (count($filters) > 0) $products = (new ProductFilterService())->filter($filters, $products);
 
-        return response()->success($products);
+        return response()->success((new PaginateJsonUtil())->paginate($products));
     }
 }
