@@ -18,6 +18,7 @@ use \App\Http\Controllers\ProductController;
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'listAllProducts']);
+    Route::get('/{supplier}', [ProductController::class, 'listProductsBySupplier']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
