@@ -5,15 +5,18 @@ namespace App\Http\Rules;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Pool;
 use Illuminate\Support\Arr;
+use App\Models\Supplier;
 
 class ListAllProductsRule {
     // list all products of both suppliers
     public function listAllProducts()
     {
-        $responses = Http::pool(fn (Pool $pool) => [
-            $pool->as('brazilian_provider')->get('http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider'),
-            $pool->as('european_provider')->get('http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/european_provider'),
-        ]);
+
+        $responses = Http::pool(function (Pool $pool) {
+            Supplier::get()->each(function (Supplier $supplier) use ($pool) {
+                return $pool->as($supplier->name)->get($supplier->api_base_url);
+            });
+        });
 
         if ($this->checkingIfAtLeastOneSupplierIsUp($responses)) {
             $products = $this->getProductsFromResponses($responses);

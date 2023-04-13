@@ -12,11 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\Supplier::create([
+            'name' => 'brazilian_provider',
+            'api_base_url' => 'http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider'
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\Supplier::create([
+            'name' => 'european_provider',
+            'api_base_url' => 'http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/european_provider'
+        ]);
     }
 }
