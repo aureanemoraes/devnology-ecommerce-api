@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\ProductService;
+use App\Models\Supplier;
 
 class ProductController extends Controller
 {
@@ -13,8 +14,13 @@ class ProductController extends Controller
         $this->productService = new ProductService();
     }
 
-    public function listAllProducts()
+    public function listAllProducts(Request $request)
     {
-        return $this->productService->listAllProducts();
+        return $this->productService->listAllProducts($request->query());
+    }
+
+    public function listProductsBySupplier($suplierId, Request $request)
+    {
+        return $this->productService->listProductsBySupplier($suplierId, $request->query());
     }
 }
