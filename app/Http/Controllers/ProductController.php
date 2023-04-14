@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\ProductService;
 use App\Models\Supplier;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
@@ -14,12 +15,12 @@ class ProductController extends Controller
         $this->productService = new ProductService();
     }
 
-    public function listAllProducts(Request $request)
+    public function listAllProducts(Request $request): JsonResponse
     {
         return $this->productService->listAllProducts($request->query());
     }
 
-    public function listProductsBySupplier($suplierId, Request $request)
+    public function listProductsBySupplier($suplierId, Request $request): JsonResponse
     {
         return $this->productService->listProductsBySupplier($suplierId, $request->query());
     }

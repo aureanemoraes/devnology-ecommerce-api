@@ -9,11 +9,12 @@ use App\Models\Supplier;
 use App\Http\Services\ProductFilterService;
 use App\Utils\FormatDataUtil;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\JsonResponse;
 use App\Utils\PaginateJsonUtil;
 
 class ListAllProductsRule {
     // list all products of both suppliers
-    public function listAllProducts($filters)
+    public function listAllProducts($filters): JsonResponse
     {
         $products = Cache::get('products', null);
 

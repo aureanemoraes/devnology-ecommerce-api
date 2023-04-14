@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Response::macro('success', function ($attrs) {
-            $data = isset($attrs['data']) ? $attrs['data'] : null;
+            $data = isset($attrs['data']) ? $attrs['data'] : [];
             $statusCode = isset($attrs['statusCode']) ? $attrs['statusCode'] : 200;
             $message = isset($attrs['message']) ? $attrs['message'] : 'Success.';
 
@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Response::macro('error', function ($attrs) {
-            $errors = isset($attrs['errors']) ? $attrs['errors'] : null;
+            $errors = isset($attrs['errors']) ? $attrs['errors'] : [];
             $statusCode = isset($attrs['statusCode']) ? $attrs['statusCode'] : 400;
             $message = isset($attrs['message']) ? $attrs['message'] : 'Error.';
 

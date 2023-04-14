@@ -8,10 +8,11 @@ use App\Http\Services\ProductFilterService;
 use App\Utils\FormatDataUtil;
 use Illuminate\Support\Facades\Cache;
 use App\Utils\PaginateJsonUtil;
+use Illuminate\Http\JsonResponse;
 
 class ListProductsBySupplier {
     // list all products of both suppliers
-    public function listProductsBySupplier($supplierId, $filters)
+    public function listProductsBySupplier($supplierId, $filters): JsonResponse
     {
         $supplier = Supplier::findOrFail($supplierId);
 
