@@ -25,7 +25,7 @@ class ListAllProductsRule {
             });
 
             if (!$this->checkingIfAtLeastOneSupplierIsUp($responses))
-                return response()->error('Suppliers API are current unavailable.', 502);
+                return response()->error([ 'message' => 'Suppliers API are current unavailable.', 'statusCode' => 502 ]);
 
             $products = $this->getProductsFromResponses($responses);
 
@@ -35,7 +35,7 @@ class ListAllProductsRule {
 
         if (count($filters) > 0) $products = (new ProductFilterService())->filter($filters, $products);
 
-        return response()->success((new PaginateJsonUtil())->paginate($products));
+        return response()->success([ 'data' => (new PaginateJsonUtil())->paginate($products) ]);
     }
 
     private function checkingIfAtLeastOneSupplierIsUp($responses)

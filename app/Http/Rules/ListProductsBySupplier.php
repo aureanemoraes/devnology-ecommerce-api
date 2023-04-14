@@ -21,7 +21,7 @@ class ListProductsBySupplier {
             $response = Http::get($supplier->api_base_url);
 
             if ($response->failed())
-                return response()->error("Could not retrieve data from $supplier->name.", $response->status());
+                return response()->error([ 'message' => "Could not retrieve data from $supplier->name.", 'statusCode' => $response->status() ]);
 
             $products = $response->json();
 
@@ -33,6 +33,6 @@ class ListProductsBySupplier {
 
         if (count($filters) > 0) $products = (new ProductFilterService())->filter($filters, $products);
 
-        return response()->success((new PaginateJsonUtil())->paginate($products));
+        return response()->success([ 'data' => (new PaginateJsonUtil())->paginate($products) ]);
     }
 }
