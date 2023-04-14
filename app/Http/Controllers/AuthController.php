@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Services\AuthService;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\User\RegisterRequest;
+use App\Http\Requests\User\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -16,22 +17,12 @@ class AuthController extends Controller
         $this->authService = new AuthService();
     }
 
-    public function register(Request $request): JsonResponse
+    public function register(RegisterRequest $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
-        ]);
-
-        if($validator->fails())
-            return response()->error([ 'message' => 'Validation Error.', 'statusCode' => 413, 'errors' => $validator->errors() ]);
-
         return (new AuthService())->register($request);
     }
 
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
