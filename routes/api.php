@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\ProductController;
 use \App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,12 @@ use \App\Http\Controllers\ShoppingCartController;
 |
 */
 
-Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'listAllProducts']);
-    Route::get('/{supplier}', [ProductController::class, 'listProductsBySupplier']);
-});
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
-Route::prefix('shopping-cart')->group(function () {
-    Route::post('/{itemId}', [ShoppingCartController::class, 'addItem']);
+Route::prefix('products')->controller(ProductController::class)->group(function () {
+    Route::get('/', 'listAllProducts');
+    Route::get('/{supplier}', 'listProductsBySupplier');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
