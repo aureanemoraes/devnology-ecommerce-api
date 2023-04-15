@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\ProductService;
-use App\Models\Supplier;
 use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
