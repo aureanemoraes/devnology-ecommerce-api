@@ -3,18 +3,23 @@
 namespace App\Utils;
 
 class FormatDataUtil {
-    public function formatArray($array) {
+    public function formatArray($array, $supplier) {
         $formattedArray = [];
 
         foreach($array as $item) {
-            $formattedArray[] = $this->format($item);
+            $formattedArray[] = $this->format($item, $supplier);
         }
+
+        // removing null values
+        $formattedArray = array_filter($formattedArray, fn ($value) => !is_null($value));
 
         return $formattedArray;
     }
 
-    public function format($item)
+    public function format($item, $supplier)
     {
+        $item = $this->preventFromInvalidData($item, $supplier);
+
         if (!isset($item))
             return $item;
 
@@ -43,4 +48,10 @@ class FormatDataUtil {
 
        return $formattedItem;
     }
+
+      // check if the current value is a valid value, the API from brazilian_provider is dupplicating the list of products inside main product list
+      private function preventFromInvalidData($item, $supplier)
+      {
+          if (!isset($item[0])) return [ ...$item, 'supplier' => $supplier ];
+      }
 }
