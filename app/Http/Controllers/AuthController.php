@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Services\AuthService;
 use Illuminate\Support\Facades\Validator;
@@ -33,5 +34,10 @@ class AuthController extends Controller
             return response()->error([ 'message' => 'Validation Error.', 'statusCode' => 413, 'errors' => $validator->errors() ]);
 
         return (new AuthService())->login($request);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        return (new AuthService())->logout($request);
     }
 }
