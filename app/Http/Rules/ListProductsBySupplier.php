@@ -30,7 +30,7 @@ class ListProductsBySupplier {
             if (!Cache::has('productsBySupplier')) Cache::put('productsBySupplier', $products, 60 * 60 * 60);
         }
 
-        $products = (new FormatDataUtil())->formatArray($products);
+        $products = (new FormatDataUtil())->formatArray($products, $supplier->name);
 
         if (count($filters) > 0) $products = (new ProductFilterService())->filter($filters, $products);
 

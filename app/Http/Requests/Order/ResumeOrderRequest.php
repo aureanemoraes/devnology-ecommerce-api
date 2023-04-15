@@ -5,7 +5,7 @@ namespace App\Http\Requests\Order;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class BuyOrderRequest extends FormRequest
+class ResumeOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,10 @@ class BuyOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'resume_id' => [ 'required', 'string', 'max:255' ],
+            'items' => [ 'required', 'array', 'min:1' ],
+            'items.*.id' => [ 'string', 'max:255' ],
+            'items.*.name' => [ 'string', 'max:255' ],
+            'items.*.supplier' => [ 'string', 'max:255' ],
         ];
     }
 }

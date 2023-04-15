@@ -54,7 +54,7 @@ class ListAllProductsRule {
         $validProducts = [];
 
         foreach($responses as $supplier => $response)
-            foreach ($response->json() as $item) $validProducts[] = $formatDataUtil->format($this->preventFromInvalidData($item, $supplier));
+            foreach ($response->json() as $item) $validProducts[] = $formatDataUtil->format($item, $supplier);
 
         // removing null values
         $validProducts = array_filter($validProducts, fn ($value) => !is_null($value));
@@ -67,9 +67,5 @@ class ListAllProductsRule {
         return $validProducts;
     }
 
-    // check if the current value is a valid value, the API from brazilian_provider is dupplicating the list of products inside main product list
-    private function preventFromInvalidData($item, $supplier)
-    {
-        if (!isset($item[0])) return [ ...$item, 'supplier' => $supplier ];
-    }
+
 }
