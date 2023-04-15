@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\ProductController;
-use \App\Http\Controllers\ShoppingCartController;
+use \App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -26,6 +26,12 @@ Route::prefix('products')->controller(ProductController::class)->group(function 
     Route::get('/{supplier}', 'listProductsBySupplier');
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+
+    Route::prefix('/orders')->controller(OrderController::class)->group(function () {
+        Route::get('/', 'history');
+        Route::post('/resume', 'resume');
+        Route::post('/buy', 'buy');
+    });
 });
