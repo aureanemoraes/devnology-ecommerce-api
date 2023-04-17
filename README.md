@@ -10,7 +10,7 @@ Composer Version ...............................................................
 
 # Executar o projeto
 
-Passos para executar localmente:
+## Passos para executar localmente:
 
 `git clone git@github.com:aureanemoraes/devnology-ecommerce-api.git`
 
@@ -25,6 +25,22 @@ Configurar o .env com os dados do DB de sua preferência.
 Executar as migrations e seeds: `php artisan migrate --seed`
 
 `php artisan serve`
+
+## Passos para executar via docker:
+
+`git clone git@github.com:aureanemoraes/devnology-ecommerce-api.git`
+
+`cd devnology-ecommerce-api`
+
+`docker build -t devnology-ecommerce-api:1.0 .`
+
+`docker run -d -p 8000:8000 devnology-ecommerce-api:1.0`
+
+`php artisan key:generate`
+
+Configurar o .env com os dados do DB de sua preferência.
+
+Executar as migrations e seeds: `php artisan migrate --seed`
 
 # Sobre o desenvolvimento da aplicação
 
