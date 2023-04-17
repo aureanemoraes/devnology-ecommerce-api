@@ -24,12 +24,18 @@ Executar as migrations e seeds: `php artisan migrate --seed`
 
 # Sobre o desenvolvimento da aplicação
 
-`Projetei a aplicação para que ela possa atender o escopo do projeto atual e possa ser escalada sem complicações. Para isso levei em consideração performance e a utilização das técnicas de clean code, deixando o código adequado para qualquer porte de aplicação (pequeno, médio e grande).
+Projetei a aplicação para que ela possa atender o escopo do projeto atual e possa ser escalada sem complicações. Para isso levei em consideração performance e a utilização das técnicas de clean code, deixando o código adequado para qualquer porte de aplicação (pequeno, médio e grande).
 A aplicação foi colocada em docker para ser visualizada em qualquer ambiente que possua essa ferramenta.
+
+
 RF
+
 -> deve listar todos os produtos disponíveis de todos os fornecedores em ordem aleatória;
+
 -> deve listar todos os produtos disponíveis por fornecedor;
+
 -> deve ser possível filtrar produtos;
+
     - RNF:
         * hasDiscount
         * discountValue
@@ -38,20 +44,33 @@ RF
         * price / preco
         * departamento
         * categoria
+        
 -> deve ser possível pesquisar produtos
+
     - RNF:
         * name / nome
         * description / descricao
+        
 -> deve ser possível realizar uma compra
+
     -> se algum item estiver indisponível a compra não poderá ser finalizada;
+    
     -> enviar um resumo e deixar em cache por 5 min para aguardar confirmação;
+    
 -> deve ser possível visualizar os produtos sem estar autenticado
+
 -> deve ser possível adicionar produtos ao carrinho de compras 
+
     - RNF: front com cookie
+    
 -> deve ser possível ver o histórico de compras
+
 -> deve ser possível ter um carrinho sem estar autenticado
+
     - RNF: front com cookie
+    
 -> deve solicitar autenticação antes de finalizar a compra
+
     - RNF:
         -> MER:
             - order
@@ -63,16 +82,29 @@ RF
                 - order_id
                 - product_id
                 - info # informações do produto no momento da compra
+                
 -> deve manter em cache os produtos visualizados recentemente
+
 -> deve tratar indisponilidade da API servidora
+
 -> deve tratar indisponilidade do back 
+
 -> deve tratar falha de conexão do cliente
+
 RNF
+
 -> db: postgres
+
 -> api: laravel
+
 -> app: nextjs
+
 -> cache: db
+
 -> aplicação em docker
+
 -> padronizar todas as responses da API utilizando MACROS;
+
 -> paginar as respostas;
--> padronizar o formato dos dados recebidos da 3rd part api;`
+
+-> padronizar o formato dos dados recebidos da 3rd part api;
