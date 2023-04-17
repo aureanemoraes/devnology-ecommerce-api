@@ -3,11 +3,15 @@ Este é um teste técnico desenvolvido para a empresa Devnolog.
 
 # Sobre 
 Laravel Version ............................................................................................. 10.7.1
+
 PHP Version ................................................................................................. 8.1.17
+
 Composer Version ............................................................................................. 2.4.2
 
 # Executar o projeto
+
 Passos para executar localmente:
+
 `git clone git@github.com:aureanemoraes/devnology-ecommerce-api.git`
 
 `cd devnology-ecommerce-api`
@@ -27,6 +31,7 @@ Executar as migrations e seeds: `php artisan migrate --seed`
 Projetei a aplicação para que ela possa atender o escopo do projeto atual e possa ser escalada sem complicações. Para isso levei em consideração performance e a utilização das técnicas de clean code, deixando o código adequado para qualquer porte de aplicação (pequeno, médio e grande).
 A aplicação foi colocada em docker para ser visualizada em qualquer ambiente que possua essa ferramenta.
 
+# To-dos utilizados de auxílio
 
 RF
 
