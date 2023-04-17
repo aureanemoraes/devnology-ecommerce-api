@@ -26,7 +26,6 @@ Executar as migrations e seeds: `php artisan migrate --seed`
 
 `Projetei a aplicação para que ela possa atender o escopo do projeto atual e possa ser escalada sem complicações. Para isso levei em consideração performance e a utilização das técnicas de clean code, deixando o código adequado para qualquer porte de aplicação (pequeno, médio e grande).
 A aplicação foi colocada em docker para ser visualizada em qualquer ambiente que possua essa ferramenta.
-
 RF
 -> deve listar todos os produtos disponíveis de todos os fornecedores em ordem aleatória;
 -> deve listar todos os produtos disponíveis por fornecedor;
@@ -60,7 +59,6 @@ RF
             - products
                 api_identifier
                 provider
-
             - orders_products
                 - order_id
                 - product_id
@@ -69,8 +67,6 @@ RF
 -> deve tratar indisponilidade da API servidora
 -> deve tratar indisponilidade do back 
 -> deve tratar falha de conexão do cliente
-
-
 RNF
 -> db: postgres
 -> api: laravel
