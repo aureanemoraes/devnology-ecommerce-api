@@ -29,7 +29,8 @@ class FormatDataUtil {
             'preco' => 'price',
             'categoria' => 'category',
             'departamento' => 'department',
-            'material' => [ 'details', 'material' ]
+            'material' => [ 'details', 'material' ],
+            'imagem' => 'gallery'
         ];
 
         $formattedItem = [];
@@ -40,8 +41,10 @@ class FormatDataUtil {
                 if (is_array($keysToChange[$key])) {
                    [$firstKeyName, $secondKeyName] = $keysToChange[$key];
                    $formattedItem[$firstKeyName][$secondKeyName] = $value;
-                } else
-                    $formattedItem[$keysToChange[$key]] = $value;
+                } else {
+                    if ($key === 'imagem') $formattedItem[$keysToChange[$key]] = [$value];
+                    else $formattedItem[$keysToChange[$key]] = $value;
+                }
             } else if (!isset($formattedItem[$key]))
                 $formattedItem[$key] = $value;
         }

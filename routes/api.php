@@ -22,8 +22,12 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::prefix('products')->controller(ProductController::class)->group(function () {
+    Route::get('/filters', 'getProductFiltersOptions');
+
     Route::get('/', 'listAllProducts');
     Route::get('/{supplier}', 'listProductsBySupplier');
+    Route::get('/{supplier_name}/{product_id}', 'getProduct');
+
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {

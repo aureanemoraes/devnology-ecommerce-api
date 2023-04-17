@@ -23,4 +23,14 @@ class ProductController extends Controller
     {
         return $this->productService->listProductsBySupplier($suplierId, $request->query());
     }
+
+    public function getProduct($supplierName, $productId): JsonResponse
+    {
+        return $this->productService->getProduct($supplierName, $productId);
+    }
+
+    public function getProductFiltersOptions(): JsonResponse
+    {
+        return $this->productService->getProductFiltersOptions();
+    }
 }

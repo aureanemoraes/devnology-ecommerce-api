@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -23,7 +24,7 @@ class ProductFilterService {
     // price will work: price && ...filters
     // other filters: filter 1 OR filter 2 OR filter 3
 
-    public function filter(Array $filters, Array $products)
+    public function filter(Array $filters, Array $products): Array
     {
         $containValidFilters = count(array_intersect(array_keys($filters), $this->validFilters)) > 0 ? true : false;
 
