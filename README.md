@@ -9,8 +9,11 @@ Composer Version ...............................................................
 # Executar o projeto
 Passos para executar localmente:
 `git clone git@github.com:aureanemoraes/devnology-ecommerce-api.git`
+
 `cd devnology-ecommerce-api`
+
 `composer i`
+
 `php artisan key:generate`
 
 Configurar o .env com os dados do DB de sua preferência.
@@ -21,7 +24,7 @@ Executar as migrations e seeds: `php artisan migrate --seed`
 
 # Sobre o desenvolvimento da aplicação
 
-Projetei a aplicação para que ela possa atender o escopo do projeto atual e possa ser escalada sem complicações. Para isso levei em consideração performance e a utilização das técnicas de clean code, deixando o código adequado para qualquer porte de aplicação (pequeno, médio e grande).
+`Projetei a aplicação para que ela possa atender o escopo do projeto atual e possa ser escalada sem complicações. Para isso levei em consideração performance e a utilização das técnicas de clean code, deixando o código adequado para qualquer porte de aplicação (pequeno, médio e grande).
 A aplicação foi colocada em docker para ser visualizada em qualquer ambiente que possua essa ferramenta.
 
 RF
@@ -54,7 +57,6 @@ RF
         -> MER:
             - order
                 - user_id
-                
             - products
                 api_identifier
                 provider
@@ -77,4 +79,4 @@ RNF
 -> aplicação em docker
 -> padronizar todas as responses da API utilizando MACROS;
 -> paginar as respostas;
--> padronizar o formato dos dados recebidos da 3rd part api;
+-> padronizar o formato dos dados recebidos da 3rd part api;`
