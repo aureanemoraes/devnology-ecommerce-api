@@ -26,22 +26,6 @@ Executar as migrations e seeds: `php artisan migrate --seed`
 
 `php artisan serve`
 
-## Passos para executar via docker:
-
-`git clone git@github.com:aureanemoraes/devnology-ecommerce-api.git`
-
-`cd devnology-ecommerce-api`
-
-`docker build -t devnology-ecommerce-api:1.0 .`
-
-`docker run -d -p 8000:8000 devnology-ecommerce-api:1.0`
-
-`php artisan key:generate`
-
-Configurar o .env com os dados do DB de sua preferência.
-
-Executar as migrations e seeds: `php artisan migrate --seed`
-
 # Sobre o desenvolvimento da aplicação
 
 Projetei a aplicação para que ela possa atender o escopo do projeto atual e possa ser escalada sem complicações. Para isso levei em consideração performance e a utilização das técnicas de clean code, deixando o código adequado para qualquer porte de aplicação (pequeno, médio e grande).
